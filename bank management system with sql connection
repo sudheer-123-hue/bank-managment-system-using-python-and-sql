@@ -1,0 +1,27 @@
+create database bank0;
+use bank0;
+
+CREATE TABLE accounts (
+    acc_no INT PRIMARY KEY,
+    name VARCHAR(100),
+    acc_type VARCHAR(20),
+    balance FLOAT,
+    pin INT,
+    mobile varchar(10)
+);
+
+select*from accounts;
+select * from transactions;
+show tables;
+drop table if exists transactions ;
+
+CREATE TABLE IF NOT EXISTS transactions (
+    transaction_id INT AUTO_INCREMENT PRIMARY KEY,
+    acc_no INT ,
+    transaction_type ENUM('Deposit', 'Withdrawal') NOT NULL,
+    amount DECIMAL(10,2) NOT NULL,
+    transaction_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (acc_no) REFERENCES accounts(acc_no) ON DELETE CASCADE
+);
+
+
